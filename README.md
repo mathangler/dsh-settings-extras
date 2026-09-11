@@ -91,25 +91,26 @@ Then open **Settings**.
 
 ## Update
 
-**Default install (`github:<owner>/<repo>`)**: the commit resolved at install time is written into the
-lockfile, so updating means removing first (re-running `add` with the same spec, or `update`, does not
-advance to a newer commit):
+```sh
+dsh plugin --profile web update dsh-settings-extras
+```
+
+`update` re-resolves the `github:` dependency and fetches the latest commit on `main`.
+
+> Re-running `add` with the same spec does **not** update — pnpm skips resolution and logs
+> `resolution step is skipped`. `update` is the command that does.
+> (`ERR_PNPM_GIT_RESOLVE_FAILED` means the repository could not be reached at that moment: retry —
+> nothing was changed.)
+
+Remove and add works too, with the same result:
 
 ```sh
 dsh plugin --profile web remove dsh-settings-extras
 dsh plugin --profile web add github:mathangler/dsh-settings-extras
 ```
 
-**One-command updates (optional)**: install from a branch ref instead — `update` then re-resolves that
-branch and follows new commits:
+With npm: `npm update dsh-settings-extras` (it follows `main` as well).
 
-```sh
-dsh plugin --profile web add github:mathangler/dsh-settings-extras#main
-dsh plugin --profile web update dsh-settings-extras      # from then on, this is all
-```
-
-A commit works too: `dsh plugin --profile web add github:mathangler/dsh-settings-extras#<sha>`.
-(With npm, the same: `npm install github:mathangler/dsh-settings-extras#<sha>`.)
 
 ## Compatibility
 

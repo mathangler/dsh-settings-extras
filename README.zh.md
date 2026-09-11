@@ -84,23 +84,24 @@ dsh web
 
 ## 更新
 
-**默认装法（`github:<owner>/<repo>`）**：安装时解析到的提交就写进了 lockfile，所以更新要 remove 再 add
-（同样的 spec 直接再 `add` 一次、或 `update`，都不会推进到新提交）：
+```sh
+dsh plugin --profile web update dsh-settings-extras
+```
+
+`update` 会重新解析这个 `github:` 依赖，取回 `main` 上的最新提交。
+
+> 用同样的 spec 再 `add` 一次**不会**更新——pnpm 会跳过解析，日志里是 `resolution step is skipped`。
+> 会更新的是 `update`。（如果你碰到 `ERR_PNPM_GIT_RESOLVE_FAILED`，那是这一刻连不上仓库，
+> 重试即可，什么都没被改动。）
+
+需要时也可以用 remove + add，效果相同：
 
 ```sh
 dsh plugin --profile web remove dsh-settings-extras
 dsh plugin --profile web add github:mathangler/dsh-settings-extras
 ```
 
-**一条命令更新（可选）**：安装时改用分支 ref，此后 `update` 会重新解析该分支并跟进新提交：
-
-```sh
-dsh plugin --profile web add github:mathangler/dsh-settings-extras#main
-dsh plugin --profile web update dsh-settings-extras      # 以后就这一条
-```
-
-也可以直接指定提交：`dsh plugin --profile web add github:mathangler/dsh-settings-extras#<sha>`。
-（用 npm 装的话同理：`npm install github:mathangler/dsh-settings-extras#<sha>`。）
+用 npm 装的话：`npm update dsh-settings-extras`（同样会跟随 `main`）。
 
 ## 兼容性
 
