@@ -1,0 +1,20 @@
+# dsh-settings-extras — profile bundle patch.
+#
+# `dsh plugin --profile web add <this package>` runs pnpm in the profile
+# directory and then appends every dependency that declares `dsh.bundle` to
+# `dsh.profile.bundles`. This patch therefore lands after the shipped bundles
+# and before the user's own cordis.patch.yml, so the row below can still be
+# overridden or disabled by id.
+#
+# One row. The host half publishes one route per feature, each with its own
+# trust-fenced handler and its own service set, so removing this row removes
+# them together and nothing else about the composition changes.
+#
+# The browser half needs no row here: the web server loads it from
+# `exports["./client"]` because package.json declares
+# `dsh.client.platform: "web"`, and that single bundle carries every feature
+# this package adds.
+
+- insert:
+    - id: settings-extras
+      name: dsh-settings-extras
