@@ -91,18 +91,25 @@ Then open **Settings**.
 
 ## Update
 
-pnpm does not re-resolve a git HEAD when the spec is unchanged, so update by removing first:
+**Default install (`github:<owner>/<repo>`)**: the commit resolved at install time is written into the
+lockfile, so updating means removing first (re-running `add` with the same spec, or `update`, does not
+advance to a newer commit):
 
 ```sh
 dsh plugin --profile web remove dsh-settings-extras
 dsh plugin --profile web add github:mathangler/dsh-settings-extras
 ```
 
-With npm, name the commit instead (npm caches the resolution in `package-lock.json` too):
+**One-command updates (optional)**: install from a branch ref instead — `update` then re-resolves that
+branch and follows new commits:
 
 ```sh
-npm install github:mathangler/dsh-settings-extras#<new commit sha>
+dsh plugin --profile web add github:mathangler/dsh-settings-extras#main
+dsh plugin --profile web update dsh-settings-extras      # from then on, this is all
 ```
+
+A commit works too: `dsh plugin --profile web add github:mathangler/dsh-settings-extras#<sha>`.
+(With npm, the same: `npm install github:mathangler/dsh-settings-extras#<sha>`.)
 
 ## Compatibility
 
