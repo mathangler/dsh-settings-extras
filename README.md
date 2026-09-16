@@ -103,7 +103,9 @@ dsh plugin --profile web add github:mathangler/dsh-settings-extras
 - DSH `0.1.5-rc.x` (the version this was verified against).
 - Requires DSH with a `web` profile.
 - Usage depends on session logs; when it cannot read them the panel shows the reason instead of
-  rendering empty.
+  rendering empty. A refresh answers immediately and rescans behind the numbers.
+- The usage scan is cheapest on a harness whose `sessionQuery` provides `observeSession`; without
+  it the same numbers are computed from whole session logs.
 
 ## License
 

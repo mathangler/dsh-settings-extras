@@ -1,6 +1,6 @@
 {
   "name": "dsh-settings-extras",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A DeepSeek Harness plugin for the Settings dialog: a Skills panel (browse, search and install from skills.sh, toggle model invocation per skill), a token-usage dashboard (lifetime totals, daily heatmap, per-model trends) and a live Web search on/off switch that withholds the web_search tool from every agent.",
   "type": "module",
   "main": "lib/index.js",

@@ -96,7 +96,10 @@ dsh plugin --profile web add github:mathangler/dsh-settings-extras
 
 - DSH `0.1.5-rc.x`（实测版本）。
 - 需要带 `web` profile 的 DSH。
-- 用量统计依赖会话日志；读不到时面板会显示原因，而不是空白。
+- 用量统计依赖会话日志；读不到时面板会显示原因，而不是空白。点击刷新会立即返回，并在后台
+  重扫，这期间屏幕上保留原有数字。
+- 当宿主的 `sessionQuery` 提供 `observeSession` 时用量扫描最省；缺失时同样能算出这些数字，
+  只是改为整份读取会话日志。
 
 ## 许可
 
